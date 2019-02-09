@@ -8,8 +8,10 @@ from flask_appbuilder.security.sqla.manager import SecurityManager
 from sqlalchemy import or_
 
 from superset import sql_parse
+from superset.auth_ldap_view_redirect import AuthLDAPViewRedirect
 from superset.connectors.connector_registry import ConnectorRegistry
 from superset.exceptions import SupersetSecurityException
+
 
 READ_ONLY_MODEL_VIEWS = {
     'DatabaseAsync',
@@ -78,6 +80,8 @@ OBJECT_SPEC_PERMISSIONS = set([
 
 
 class SupersetSecurityManager(SecurityManager):
+
+    authldapview = AuthLDAPViewRedirect
 
     def get_schema_perm(self, database, schema):
         if schema:
