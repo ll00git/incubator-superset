@@ -37,6 +37,7 @@ from sqlalchemy.orm.mapper import Mapper
 from superset import sql_parse
 from superset.connectors.connector_registry import ConnectorRegistry
 from superset.exceptions import SupersetSecurityException
+from superset.auth_view_redirect import AuthDBViewRedirect, AuthLDAPViewRedirect
 
 if TYPE_CHECKING:
     from superset.common.query_context import QueryContext
@@ -74,6 +75,11 @@ PermissionModelView.list_widget = SupersetSecurityListWidget
 
 
 class SupersetSecurityManager(SecurityManager):
+
+    authdbview = AuthDBViewRedirect
+    authldapview = AuthLDAPViewRedirect
+
+
     READ_ONLY_MODEL_VIEWS = {"DatabaseAsync", "DatabaseView", "DruidClusterModelView"}
 
     USER_MODEL_VIEWS = {

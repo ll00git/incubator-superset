@@ -473,3 +473,18 @@ def sync_tags():
     add_types(db.engine, metadata)
     add_owners(db.engine, metadata)
     add_favorites(db.engine, metadata)
+
+
+def debug_run(app, port, use_reloader):
+    return app.run(
+        host='0.0.0.0',
+        port=int(port),
+        threaded=True,
+        debug=True,
+        use_reloader=use_reloader)
+
+
+if __name__ == '__main__':
+    port = 18088
+    use_reloader = True
+    debug_run(app, port, use_reloader)
